@@ -5,6 +5,7 @@ typedef struct
 } IntegerMatrix;
 
 void CreateIntegerMatrix(IntegerMatrix *, int, int);
-void ZeroIntegerMatrix(IntegerMatrix *);
-void SetValueOnIntegerMatrix(IntegerMatrix *, int, int, int);
 void DestroyIntegerMatrix(IntegerMatrix *);
+int SetValueOnIntegerMatrix(IntegerMatrix *, int, int, int);
+int *GetValueFromIntegerMatrix(IntegerMatrix *, int, int);
+void ZeroIntegerMatrix(IntegerMatrix *);
