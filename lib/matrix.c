@@ -69,3 +69,48 @@ void ZeroIntegerMatrix(IntegerMatrix *matrix)
         }
     }
 }
+
+void CreateIdentityIntegerMatrix(IntegerMatrix *matrix, int size)
+{
+    int i, j;
+
+    CreateIntegerMatrix(matrix, size, size);
+
+    for (i = 0; i < matrix->lines; i++)
+    {
+        for (j = 0; j < matrix->columns; j++)
+        {
+            if (i == j)
+                SetValueOnIntegerMatrix(matrix, i, j, 1);
+            else
+                SetValueOnIntegerMatrix(matrix, i, j, 0);
+        }
+    }
+}
+
+int SumIntegerMatrices(IntegerMatrix *matrix1, IntegerMatrix *matrix2, IntegerMatrix *result)
+{
+    int i, j;
+    int sum;
+
+    if (matrix1->lines != matrix2->lines ||
+        matrix1->columns != matrix2->columns)
+    {
+        result = NULL;
+        return 0;
+    }
+
+    result->lines = matrix1->lines;
+    result->columns = matrix1->columns;
+
+    for (i = 0; i < result->lines; i++)
+    {
+        for (j = 0; j < result->columns; j++)
+        {
+            sum = *GetValueFromIntegerMatrix(matrix1, i, j) + *GetValueFromIntegerMatrix(matrix2, i, j);
+            SetValueOnIntegerMatrix(result, i, j, sum);
+        }
+    }
+
+    return 1;
+}
