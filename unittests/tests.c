@@ -5,16 +5,30 @@
 
 Test(integerMatrixTests, create)
 {
-    IntegerMatrix matrix = {0};
-    matrix.content = NULL;
+    IntegerMatrix matrix1 = {0}, matrix2 = {0}, matrix3 = {0};
+    matrix1.content = NULL;
+    matrix2.content = NULL;
+    matrix3.content = NULL;
 
-    CreateIntegerMatrix(&matrix, 5, 10);
+    CreateIntegerMatrix(&matrix1, 5, 10);
+    CreateIntegerMatrix(&matrix2, -1, 0);
+    CreateIntegerMatrix(&matrix3, -56456, -768);
 
-    cr_expect(matrix.content != NULL);
-    cr_expect(matrix.lines == 5);
-    cr_expect(matrix.columns == 10);
+    cr_expect(matrix1.content != NULL);
+    cr_expect(matrix1.lines == 5);
+    cr_expect(matrix1.columns == 10);
 
-    DestroyIntegerMatrix(&matrix);
+    cr_expect(matrix2.content != NULL);
+    cr_expect(matrix2.lines == 1);
+    cr_expect(matrix2.columns == 1);
+
+    cr_expect(matrix3.content != NULL);
+    cr_expect(matrix3.lines == 1);
+    cr_expect(matrix3.columns == 1);
+
+    DestroyIntegerMatrix(&matrix1);
+    DestroyIntegerMatrix(&matrix2);
+    DestroyIntegerMatrix(&matrix3);
 }
 
 Test(integerMatrixTests, destroy)
@@ -116,6 +130,28 @@ Test(integerMatrixTests, isIdentity)
     cr_expect(IsIdentity(&matrix2) == 1);
     cr_expect(IsIdentity(&matrix3) == 0);
     cr_expect(IsIdentity(&matrix4) == 0);
+
+    DestroyIntegerMatrix(&matrix1);
+    DestroyIntegerMatrix(&matrix2);
+    DestroyIntegerMatrix(&matrix3);
+    DestroyIntegerMatrix(&matrix4);
+}
+
+Test(integerMatrixTests, isSquare)
+{
+    IntegerMatrix matrix1 = {0}, matrix2 = {0}, matrix3 = {0}, matrix4 = {0};
+
+    CreateIdentityIntegerMatrix(&matrix1, 12);
+    CreateIdentityIntegerMatrix(&matrix2, 44);
+    CreateIntegerMatrix(&matrix3, 21, 2);
+    CreateIntegerMatrix(&matrix4, 4, 6);
+
+    ZeroIntegerMatrix(&matrix3);
+
+    cr_expect(IsSquare(&matrix1) == 1);
+    cr_expect(IsSquare(&matrix2) == 1);
+    cr_expect(IsSquare(&matrix3) == 0);
+    cr_expect(IsSquare(&matrix4) == 0);
 
     DestroyIntegerMatrix(&matrix1);
     DestroyIntegerMatrix(&matrix2);
