@@ -16,12 +16,16 @@ void CreateIntegerMatrix(IntegerMatrix *matrix, int lines, int columns)
     if (content == NULL)
         exit(1);
 
+    matrix->lines = lines;
+    matrix->columns = columns;
     matrix->content = content;
 }
 
 void DestroyIntegerMatrix(IntegerMatrix *matrix)
 {
     ZeroIntegerMatrix(matrix);
+    matrix->lines = 0;
+    matrix->columns = 0;
     free(matrix->content);
     matrix->content = NULL;
 }
@@ -86,6 +90,39 @@ void CreateIdentityIntegerMatrix(IntegerMatrix *matrix, int size)
                 SetValueOnIntegerMatrix(matrix, i, j, 0);
         }
     }
+}
+
+int IsIdentity(IntegerMatrix *matrix)
+{
+    int i, j;
+
+    if (matrix->lines != matrix->columns)
+        return 0;
+
+    for (i = 0; i < matrix->lines; i++)
+    {
+        for (j = 0; j < matrix->columns; j++)
+        {
+            if (i == j)
+            {
+                if (*GetValueFromIntegerMatrix(matrix, i, j) != 1)
+                    return 0;
+            }
+            else
+            {
+                if (*GetValueFromIntegerMatrix(matrix, i, j) != 0)
+                    return 0;
+            }
+        }
+    }
+
+    return 1;
+}
+
+int IsSquare(IntegerMatrix *matrix)
+{
+    return matrix->lines == matrix->columns &&
+           matrix->lines != 0 && matrix->columns != 0;
 }
 
 int SumIntegerMatrices(IntegerMatrix *matrix1, IntegerMatrix *matrix2, IntegerMatrix *result)

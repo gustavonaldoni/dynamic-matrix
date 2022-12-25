@@ -9,7 +9,11 @@ Test(integerMatrixTests, create)
     matrix.content = NULL;
 
     CreateIntegerMatrix(&matrix, 5, 10);
+
     cr_expect(matrix.content != NULL);
+    cr_expect(matrix.lines == 5);
+    cr_expect(matrix.columns == 10);
+
     DestroyIntegerMatrix(&matrix);
 }
 
@@ -97,6 +101,28 @@ Test(integerMatrixTests, createIdentity)
     DestroyIntegerMatrix(&matrix);
 }
 
+Test(integerMatrixTests, isIdentity)
+{
+    IntegerMatrix matrix1 = {0}, matrix2 = {0}, matrix3 = {0}, matrix4 = {0};
+
+    CreateIdentityIntegerMatrix(&matrix1, 5);
+    CreateIdentityIntegerMatrix(&matrix2, 78);
+    CreateIntegerMatrix(&matrix3, 21, 22);
+    CreateIntegerMatrix(&matrix4, 4, 12);
+
+    ZeroIntegerMatrix(&matrix4);
+
+    cr_expect(IsIdentity(&matrix1) == 1);
+    cr_expect(IsIdentity(&matrix2) == 1);
+    cr_expect(IsIdentity(&matrix3) == 0);
+    cr_expect(IsIdentity(&matrix4) == 0);
+
+    DestroyIntegerMatrix(&matrix1);
+    DestroyIntegerMatrix(&matrix2);
+    DestroyIntegerMatrix(&matrix3);
+    DestroyIntegerMatrix(&matrix4);
+}
+
 Test(integerMatrixTests, sum)
 {
     int i, j;
@@ -130,6 +156,8 @@ Test(integerMatrixTests, multiplyConstant)
     IntegerMatrix matrix1 = {0}, result = {0};
 
     CreateIntegerMatrix(&matrix1, 32, 12);
+
+    srand(time(NULL));
 
     for (i = 0; i < matrix1.lines; i++)
         for (j = 0; j < matrix1.columns; j++)
