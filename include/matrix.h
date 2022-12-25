@@ -12,3 +12,5 @@ void ZeroIntegerMatrix(IntegerMatrix *);
 
 void CreateIdentityIntegerMatrix(IntegerMatrix *, int);
 int SumIntegerMatrices(IntegerMatrix *, IntegerMatrix *, IntegerMatrix *);
+void MultiplyMatrixByConstant(IntegerMatrix *, IntegerMatrix*, int);
+int MultiplyIntegerMatrices(IntegerMatrix *, IntegerMatrix *, IntegerMatrix *);

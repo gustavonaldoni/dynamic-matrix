@@ -114,3 +114,26 @@ int SumIntegerMatrices(IntegerMatrix *matrix1, IntegerMatrix *matrix2, IntegerMa
 
     return 1;
 }
+
+void MultiplyMatrixByConstant(IntegerMatrix *matrix, IntegerMatrix *result, int constant)
+{
+    int i, j;
+    int newValue;
+
+    result->lines = matrix->lines;
+    result->columns = matrix->columns;
+
+    for (i = 0; i < result->lines; i++)
+    {
+        for (j = 0; j < result->columns; j++)
+        {
+            newValue = *GetValueFromIntegerMatrix(matrix, i, j) * constant;
+            SetValueOnIntegerMatrix(result, i, j, newValue);
+        }
+    }
+}
+
+int MultiplyIntegerMatrices(IntegerMatrix *matrix1, IntegerMatrix *matrix2, IntegerMatrix *result)
+{
+    return 1;
+}

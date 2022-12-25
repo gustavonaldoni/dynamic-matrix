@@ -122,3 +122,25 @@ Test(integerMatrixTests, sum)
     DestroyIntegerMatrix(&matrix2);
     DestroyIntegerMatrix(&result);
 }
+
+Test(integerMatrixTests, multiplyConstant)
+{
+    int i, j;
+    const int constant = 32;
+    IntegerMatrix matrix1 = {0}, result = {0};
+
+    CreateIntegerMatrix(&matrix1, 32, 12);
+
+    for (i = 0; i < matrix1.lines; i++)
+        for (j = 0; j < matrix1.columns; j++)
+            SetValueOnIntegerMatrix(&matrix1, i, j, rand() % 10);
+
+    MultiplyMatrixByConstant(&matrix1, &result, 10);
+
+    for (i = 0; i < result.lines; i++)
+        for (j = 0; j < result.columns; j++)
+            cr_expect(*GetValueFromIntegerMatrix(&result, i, j) == *GetValueFromIntegerMatrix(&matrix1, i, j) * constant);
+
+    DestroyIntegerMatrix(&matrix1);
+    DestroyIntegerMatrix(&result);
+}
