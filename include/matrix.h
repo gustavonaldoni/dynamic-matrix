@@ -14,5 +14,5 @@ void CreateIdentityIntegerMatrix(IntegerMatrix *, int);
 int IsIdentity(IntegerMatrix *);
 int IsSquare(IntegerMatrix *);
 int SumIntegerMatrices(IntegerMatrix *, IntegerMatrix *, IntegerMatrix *);
-void MultiplyMatrixByConstant(IntegerMatrix *, IntegerMatrix*, int);
+int MultiplyMatrixByConstant(IntegerMatrix *, IntegerMatrix*, int);
 int MultiplyIntegerMatrices(IntegerMatrix *, IntegerMatrix *, IntegerMatrix *);

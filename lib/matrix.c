@@ -152,13 +152,14 @@ int SumIntegerMatrices(IntegerMatrix *matrix1, IntegerMatrix *matrix2, IntegerMa
     return 1;
 }
 
-void MultiplyMatrixByConstant(IntegerMatrix *matrix, IntegerMatrix *result, int constant)
+int MultiplyMatrixByConstant(IntegerMatrix *matrix, IntegerMatrix *result, int constant)
 {
     int i, j;
     int newValue;
 
-    result->lines = matrix->lines;
-    result->columns = matrix->columns;
+    if (result->lines != matrix->lines ||
+        result->columns != matrix->columns)
+        return 0;
 
     for (i = 0; i < result->lines; i++)
     {
@@ -168,6 +169,8 @@ void MultiplyMatrixByConstant(IntegerMatrix *matrix, IntegerMatrix *result, int 
             SetValueOnIntegerMatrix(result, i, j, newValue);
         }
     }
+
+    return 1;
 }
 
 int MultiplyIntegerMatrices(IntegerMatrix *matrix1, IntegerMatrix *matrix2, IntegerMatrix *result)

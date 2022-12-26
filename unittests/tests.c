@@ -192,6 +192,7 @@ Test(integerMatrixTests, multiplyConstant)
     IntegerMatrix matrix1 = {0}, result = {0};
 
     CreateIntegerMatrix(&matrix1, 32, 12);
+    CreateIntegerMatrix(&result, 32, 12);
 
     srand(time(NULL));
 
@@ -199,7 +200,7 @@ Test(integerMatrixTests, multiplyConstant)
         for (j = 0; j < matrix1.columns; j++)
             SetValueOnIntegerMatrix(&matrix1, i, j, rand() % 10);
 
-    MultiplyMatrixByConstant(&matrix1, &result, 10);
+    MultiplyMatrixByConstant(&matrix1, &result, constant);
 
     for (i = 0; i < result.lines; i++)
         for (j = 0; j < result.columns; j++)
