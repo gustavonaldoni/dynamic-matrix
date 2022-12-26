@@ -66,12 +66,8 @@ void ZeroIntegerMatrix(IntegerMatrix *matrix)
     int i, j;
 
     for (i = 0; i < matrix->lines; i++)
-    {
         for (j = 0; j < matrix->columns; j++)
-        {
             SetValueOnIntegerMatrix(matrix, i, j, 0);
-        }
-    }
 }
 
 void CreateIdentityIntegerMatrix(IntegerMatrix *matrix, int size)
